@@ -11,13 +11,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// 이진 탐색 트리의 노드에 대한 구조 정의
 typedef struct node {
 	int key;
 	struct node *left;
 	struct node *right;
 } Node;
 
-int initializeBST(Node** h);
+int initializeBST(Node** h); // 이진 탐색 트리 초기화
 
 /* functions that you have to implement */
 void inorderTraversal(Node* ptr);	  /* recursive inorder traversal */
@@ -29,8 +30,6 @@ Node* searchRecursive(Node* ptr, int key);  /* search the node for the key */
 Node* searchIterative(Node* head, int key);  /* search the node for the key */
 int freeBST(Node* head); /* free all memories allocated to the tree */
 void freeNode(Node* ptr);
-/* you may add your own defined functions if necessary */
-
 
 int main()
 {
@@ -111,6 +110,7 @@ int main()
 	return 1;
 }
 
+// 이진 탐색 트리를 초기화 하는 함수, 이미 트리가 존재하면 해당 트리를 해제한 후 새로 생성
 int initializeBST(Node** h) {
 
 	if(*h != NULL)
@@ -123,6 +123,7 @@ int initializeBST(Node** h) {
 	return 1;
 }
 
+// 중위 순회를 수행하는 재귀 함수, 왼쪽 노드 -> 루트 노드 -> 오른쪽 노드 순으로 출력
 void inorderTraversal(Node* ptr)
 {
 	if(ptr) {
@@ -132,6 +133,7 @@ void inorderTraversal(Node* ptr)
 	}
 }
 
+// 전위 순회를 수행하는 재귀 함수, 루트 노드 -> 왼쪽 노드 -> 오른쪽 노드 순으로 출력
 void preorderTraversal(Node* ptr)
 {
 	if(ptr) {
@@ -141,6 +143,7 @@ void preorderTraversal(Node* ptr)
 	}
 }
 
+// 후위 순회를 수행하는 재귀 함수, 왼쪽 노드 -> 오른쪽 노드 -> 루트 노드 순으로 출력
 void postorderTraversal(Node* ptr)
 {
 	if(ptr) {
@@ -150,6 +153,7 @@ void postorderTraversal(Node* ptr)
 	}
 }
 
+// 이진 탐색 트리에서 노드를 삽입하는 함수, 먼저 새 노드를 생성하고 트리를 순회하면서 적절한 위치를 찾아 삽입
 int insert(Node* head, int key)
 {
 	Node* newNode = (Node*)malloc(sizeof(Node));
@@ -183,6 +187,7 @@ int insert(Node* head, int key)
 	return 1;
 }
 
+// 키에 해당하는 잎 노들르 삭제하는 함수, 해당 노드가 잎 노드가 아니면 삭제 안함
 int deleteLeafNode(Node* head, int key)
 {
 	if (head == NULL) {
@@ -229,6 +234,7 @@ int deleteLeafNode(Node* head, int key)
 	return 1;
 }
 
+// 키에 해당하는 노드를 재귀적으로 찾는 함수. 찾지 못하면 NULL 반환
 Node* searchRecursive(Node* ptr, int key)
 {
 	if(ptr == NULL)
@@ -242,6 +248,8 @@ Node* searchRecursive(Node* ptr, int key)
 	return ptr;
 
 }
+
+// 키에 해당하는 노드를 반복적으로 찾는 함수. 찾지 못하면 NULL 반환
 Node* searchIterative(Node* head, int key)
 {
 	Node* ptr = head->left;
@@ -259,6 +267,7 @@ Node* searchIterative(Node* head, int key)
 	return NULL;
 }
 
+// 트리에 할당된 모든 메모리를 해제하는 함수. 모든 노드를 순회하며 freeNode 함수를 호출
 int freeBST(Node* head)
 {
 
@@ -274,6 +283,7 @@ int freeBST(Node* head)
 	return 1;
 }
 
+// 노드에 할당된 메모리를 해제하는 함수. 재귀적으로 모든 하위 노드를 방문
 void freeNode(Node* ptr)
 {
 	if(ptr) {
